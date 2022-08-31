@@ -69,10 +69,30 @@
 <body>
     <div class="login">
         <h1>CheckTracking</h1>
-        <form method="post">
-            <input type="text" name="u" placeholder="tracking number" required="required" />
-            <button type="submit" class="btn btn-primary btn-block btn-large">ค้นหา</button>
-        </form>
+        <input type="text" name="u" placeholder="tracking number" id="tracking_number">
+        <button type="button" class="btn btn-primary btn-block btn-large" onclick="check()">ค้นหา</button>
     </div>
 </body>
+<script type="text/javascript" src="data.json"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+    integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript">
+    function check() {
+        $.getJSON('/devphuwarin.github.io/data.json', function (data) {
+            let tk_number2 = document.getElementById('tracking_number').value;
+            let chk_number = 'false';
+            for (let i = 0; i < data.length; i++) {
+                if (data[i]['number'] == tk_number2) {
+                    chk_number = 'true';
+                    break;
+                } 
+            }
+            console.log(chk_number);
+            console.log(tk_number2);
+            
+        });
+
+    }
+</script>
 </html>
