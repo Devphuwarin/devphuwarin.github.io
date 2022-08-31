@@ -1,4 +1,9 @@
 function check() {
+    Swal.fire({
+                    icon: 'success',
+                    title: 'Oops...',
+                    text: 'มีข้อมูลที่ตรงกัน!'
+                })
     $.getJSON('/devphuwarin.github.io/data.json', function (data) {
         let tk_number2 = document.getElementById('tracking_number').value;
         let chk_number = 'false';
