@@ -1,5 +1,5 @@
 function check() {
-    fetch('data.json')
+    fetch('data.csv')
     .then(response => response.text())
     .then(data => {
         data = JSON.parse(data)
