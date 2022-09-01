@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
     <style>
         @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
@@ -146,6 +150,10 @@
             height: 300px;
         }
 
+        .card {
+            margin-top: 50%;
+        }
+
         .login h1 {
             color: #fff;
             text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
@@ -177,16 +185,28 @@
             box-shadow: inset 0 -5px 45px rgba(100, 100, 100, 0.4), 0 1px 1px rgba(255, 255, 255, 0.2);
         }
     </style>
-    <title>CheckTracking</title>
+    <title>Check Tracking Number</title>
     <script src="//script.sheetsu.com/"></script>
 </head>
 
 <body>
     <div class="login">
-        <h1>CheckTracking</h1>
+        <h1>ค้นหาเลขพัสดุ</h1>
         <input type="text" name="u" placeholder="tracking number" id="tracking_number">
         <button class="btn btn-primary btn-block btn-large" onclick="check()">ค้นหา</button>
     </div>
+    <div class="d-none" id="data_chk">
+        <div class="container d-flex justify-content-center">
+            <div class="card d-flex justify-content-center col-8">
+                <div class="card-body justify-content-center text-center" id="data_conf">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
         integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -198,9 +218,9 @@
             Sheetsu.read("https://sheetsu.com/apis/v1.0su/2fc3d58c255e/", {}, successFunc);
         }
         // Read whole spreadsheet
-        
+
         function successFunc(data) {
-            
+
             //data = this.successFunc();
             console.log(data);
             let tk_number2 = document.getElementById('tracking_number').value;
@@ -211,6 +231,8 @@
                         title: 'Oops...',
                         text: 'มีข้อมูลที่ตรงกัน!'
                     })
+                    $('#data_chk').removeClass("d-none");
+                    document.getElementById("data_conf").innerHTML += "<h2>" + data[i]['address'] + "</h2>";
                     break;
                 } else {
                     Swal.fire({
@@ -218,6 +240,7 @@
                         title: 'Oops...',
                         text: 'ไม่มีข้อมูล!'
                     })
+                    $('#data_chk').addClass("d-none");
                 }
             }
         }
