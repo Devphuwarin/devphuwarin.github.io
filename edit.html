@@ -231,8 +231,9 @@
                         title: 'Oops...',
                         text: 'มีข้อมูลที่ตรงกัน!'
                     })
+                    $(".answer").remove();
                     $('#data_chk').removeClass("d-none");
-                    document.getElementById("data_conf").innerHTML += "<h2>" + data[i]['address'] + "</h2>";
+                    document.getElementById("data_conf").innerHTML += "<h2 class='answer'>" + data[i]['address'] + "</h2>";
                     break;
                 } else {
                     Swal.fire({
